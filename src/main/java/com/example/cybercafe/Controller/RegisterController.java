@@ -31,9 +31,9 @@ public class RegisterController {
                                               @PathVariable("email") String email) throws IOException{
         Map<String,String > response = new HashMap<>();
         try {
-            registrationService.uploadimage(file,email);
-            response.put("status","Success");
-            return response;
+
+           return registrationService.uploadimage(file,email);
+
         } catch (Exception e) {
             response.put("status","Failure");
             return response;
@@ -45,9 +45,8 @@ public class RegisterController {
                                                       @PathVariable("email") String email) throws IOException{
         Map<String,String > response = new HashMap<>();
         try {
-            registrationService.uploadId(file,email);
-            response.put("status","Success");
-            return response;
+            return registrationService.uploadId(file,email);
+
         } catch (Exception e) {
             response.put("status","Failure");
             return response;

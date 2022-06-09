@@ -27,10 +27,12 @@ public class RegistrationService {
     public Map<String,String> uploadimage(MultipartFile file, String email) throws IOException {
        RegistrationModel registrationModel= registerRepo.findByEmail(email);
         Map<String,String > map = new HashMap<>();
+
         try {
             String filename = StringUtils.cleanPath(file.getOriginalFilename());
             registrationModel.setPhotofilename(filename);
             registrationModel.setPhotodata(file.getBytes());
+            registerRepo.save(registrationModel);
             map.put("status","Success");
             return map;
         } catch (Throwable th) {
@@ -46,16 +48,21 @@ public class RegistrationService {
         return registerRepo.findById(id);
     }
 
-    public RegistrationModel uploadId(MultipartFile file, String email) {
+    public Map<String,String> uploadId(MultipartFile file, String email) {
         RegistrationModel registrationModel= registerRepo.findByEmail(email);
-
+        Map<String,String > map = new HashMap<>();
         try {
             String filename = StringUtils.cleanPath(file.getOriginalFilename());
             registrationModel.setIDfilename(filename);
             registrationModel.setIDdata(file.getBytes());
+            registerRepo.save(registrationModel);
+            map.put("status","Success");
+            return map;
         } catch (Throwable th) {
             th.printStackTrace();
+            map.put("status","Failure");
+            return map;
         }
-        return registerRepo.save(registrationModel);
+
     }
 }
