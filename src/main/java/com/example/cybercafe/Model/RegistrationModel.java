@@ -16,23 +16,12 @@ public class RegistrationModel {
     private String username;
     private String password;
     private String photofilename;
-    private String photofiletype;
     @Lob
     private byte[] photodata;
-//    private String IDfilename;
-//    private String IDfiletype;
-//    @Lob
-//    private byte[] IDdata;
+    private String IDfilename;
+    @Lob
+    private byte[] IDdata;
 
-    public RegistrationModel(String name, String email, String username, String password, String photofilename, String photofiletype, byte[] photodata) {
-        this.name = name;
-        this.email = email;
-        this.username = username;
-        this.password = password;
-        this.photofilename = photofilename;
-        this.photofiletype = photofiletype;
-        this.photodata = photodata;
-    }
 
     public RegistrationModel() {
     }

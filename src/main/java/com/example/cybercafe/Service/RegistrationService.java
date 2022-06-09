@@ -39,4 +39,17 @@ public class RegistrationService {
 
         return registerRepo.findById(id);
     }
+
+    public RegistrationModel uploadId(MultipartFile file, String email) {
+        RegistrationModel registrationModel= registerRepo.findByEmail(email);
+
+        try {
+            String filename = StringUtils.cleanPath(file.getOriginalFilename());
+            registrationModel.setIDfilename(filename);
+            registrationModel.setIDdata(file.getBytes());
+        } catch (Throwable th) {
+            th.printStackTrace();
+        }
+        return registerRepo.save(registrationModel);
+    }
 }

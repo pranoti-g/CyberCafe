@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 @CrossOrigin(origins = "*")
@@ -25,10 +27,25 @@ public class RegisterController {
     }
 
     @PutMapping("/uploadimage/{email}")
-    public ResponseEntity<HttpStatus> uploadFileimage(@RequestParam("file") MultipartFile file,@PathVariable("email") String email) throws IOException{
+    public Map<String,String> uploadFileimage(@RequestParam("file") MultipartFile file,
+                                              @PathVariable("email") String email) throws IOException{
+        Map<String,String > response = new HashMap<>();
+        try {
+
+            registrationService.uploadimage(file,email);
+            return response.put("status","Success");
+
+        } catch (Exception e) {
+            return response.put("status","Failure");
+        }
+    }
+
+    @PutMapping("/uploadId/{email}")
+    public ResponseEntity<HttpStatus> uploadFileId(@RequestParam("file") MultipartFile file,
+                                                      @PathVariable("email") String email) throws IOException{
 
         try {
-            registrationService.uploadimage(file,email);
+            registrationService.uploadId(file,email);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
