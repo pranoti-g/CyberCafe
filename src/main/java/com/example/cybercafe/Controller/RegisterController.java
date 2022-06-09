@@ -31,24 +31,26 @@ public class RegisterController {
                                               @PathVariable("email") String email) throws IOException{
         Map<String,String > response = new HashMap<>();
         try {
-
             registrationService.uploadimage(file,email);
-            return response.put("status","Success");
-
+            response.put("status","Success");
+            return response;
         } catch (Exception e) {
-            return response.put("status","Failure");
+            response.put("status","Failure");
+            return response;
         }
     }
 
     @PutMapping("/uploadId/{email}")
-    public ResponseEntity<HttpStatus> uploadFileId(@RequestParam("file") MultipartFile file,
+    public Map<String,String> uploadFileId(@RequestParam("file") MultipartFile file,
                                                       @PathVariable("email") String email) throws IOException{
-
+        Map<String,String > response = new HashMap<>();
         try {
             registrationService.uploadId(file,email);
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            response.put("status","Success");
+            return response;
         } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            response.put("status","Failure");
+            return response;
         }
     }
 
