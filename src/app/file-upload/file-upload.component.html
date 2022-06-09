@@ -23,6 +23,19 @@
 
     </div>
   </div>
+  <div *ngIf="currentFile" class="progress my-3">
+    <div
+      class="progress-bar progress-bar-info progress-bar-striped"
+      role="progressbar"
+      attr.aria-valuenow="{{ progress }}"
+      aria-valuemin="0"
+      aria-valuemax="100"
+      [ngStyle]="{ width: progress + '%' }"
+    >
+      {{ progress }}%
+    </div>
+  </div>
+
 <br>
   <div class="row align-items-center py-3">
   <div class="col-md-3 ps-5">
@@ -40,7 +53,18 @@
   </div>
 
 </div>
-  
+<div *ngIf="currentId" class="progress my-3">
+  <div
+    class="progress-bar progress-bar-info progress-bar-striped"
+    role="progressbar"
+    attr.aria-valuenow="{{ progress }}"
+    aria-valuemin="0"
+    aria-valuemax="100"
+    [ngStyle]="{ width: progress + '%' }"
+  >
+    {{ progress1 }}%
+  </div>
+</div>
   <div class="px-6 py-5">
     <button type="submit" class="btn btn-primary btn-lg" (click)="Submit()">Submit</button>
   </div>

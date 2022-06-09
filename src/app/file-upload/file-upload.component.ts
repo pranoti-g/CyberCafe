@@ -1,3 +1,4 @@
+import { HttpEventType, HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -16,7 +17,8 @@ export class FileUploadComponent implements OnInit {
   currentId?: File;
   message = '';
   email:any;
-
+  progress = 0;
+  progress1 = 0;
 
   constructor(private router:Router, private registerservice:RegisterserviceService,
     private route : ActivatedRoute) { }
@@ -31,6 +33,7 @@ export class FileUploadComponent implements OnInit {
     this.selectedId = event.target.files;
   }
   upload(): void {
+    this.progress = 0;
     if (this.selectedFiles) {
       const file: File | null = this.selectedFiles.item(0);
       if (file) {
@@ -38,7 +41,12 @@ export class FileUploadComponent implements OnInit {
         console.log(this.selectFile+":"+this.currentFile)
         this.registerservice.upload(this.currentFile,this.email).subscribe({
           next: (event: any) => {
-            alert("Upload Successfully");
+            if (event.type === HttpEventType.UploadProgress) {
+              this.progress = Math.round(100 * event.loaded / event.total);
+            } else if (event instanceof HttpResponse) {
+              this.message = event.body.message;
+             
+            }
           },
           error: (err: any) => {
             console.log(err);
@@ -48,9 +56,10 @@ export class FileUploadComponent implements OnInit {
             } else {
               this.message = 'Could not upload the file!';
             }
-
+          
             this.currentFile = undefined;
           }
+          
         });
       }
 
@@ -60,6 +69,7 @@ export class FileUploadComponent implements OnInit {
 
 
   uploadId(): void {
+    this.progress1 = 0;
     if (this.selectedId) {
       const file: File | null = this.selectedId.item(0);
       if (file) {
@@ -67,7 +77,12 @@ export class FileUploadComponent implements OnInit {
         console.log(this.selectFile+":"+this.currentId)
         this.registerservice.uploadId(this.currentId,this.email).subscribe({
           next: (event: any) => {
-            alert("Upload Successfully");
+            if (event.type === HttpEventType.UploadProgress) {
+              this.progress1 = Math.round(100 * event.loaded / event.total);
+            } else if (event instanceof HttpResponse) {
+              this.message = event.body.message;
+             
+            }
           },
           error: (err: any) => {
             console.log(err);
@@ -77,7 +92,7 @@ export class FileUploadComponent implements OnInit {
             } else {
               this.message = 'Could not upload the file!';
             }
-
+          
             this.currentId = undefined;
           }
         });
@@ -88,6 +103,9 @@ export class FileUploadComponent implements OnInit {
   }
   
   Submit(){
+    this.upload();
+    this.uploadId();
+    alert("upload Succefully");
     this.router.navigate(['/login']);
   }
 
