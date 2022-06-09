@@ -16,15 +16,33 @@
     </div>
     <div class="col-md-9 pe-5">
 
-      <input class="form-control form-control-lg" id="formFileLg" type="file" />
+      <input class="form-control form-control-lg" id="formFileLg" (change)="selectFile($event)" type="file" />
+      <br>
+      <button type="submit" class="btn btn-primary btn-lg" (click)="upload()">Upload</button>
       <div class="small text-muted mt-2">Max file size 50 MB</div>
 
     </div>
   </div>
+<br>
+  <div class="row align-items-center py-3">
+  <div class="col-md-3 ps-5">
 
+    <h6 class="mb-0">Upload ID</h6>
+
+  </div>
+  <div class="col-md-9 pe-5">
+
+    <input class="form-control form-control-lg" id="formFileLg" (change)="selectId($event)" type="file" />
+    <br>
+    <button type="submit" class="btn btn-primary btn-lg" (click)="uploadId()">Upload</button>
+    <div class="small text-muted mt-2">Max file size 50 MB</div>
+
+  </div>
+
+</div>
   
-  <div class="px-5 py-4">
-    <button type="submit" class="btn btn-primary btn-lg" (click)="upload()">Register</button>
+  <div class="px-6 py-5">
+    <button type="submit" class="btn btn-primary btn-lg" (click)="Submit()">Submit</button>
   </div>
 
   </div>

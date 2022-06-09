@@ -34,5 +34,18 @@ export class RegisterserviceService {
 
     return this.http.request(req);
   }
+
+  uploadId(file: File,email: any): Observable<HttpEvent<any>> {
+    const formData: FormData = new FormData();
+
+    formData.append('file', file);
+
+    const req = new HttpRequest('put', `${this.baseurl}uploadId/${email}`, formData, {
+      reportProgress: true,
+      responseType: 'json'
+    });
+
+    return this.http.request(req);
+  }
   
 }

@@ -25,9 +25,9 @@ export class RegisterComponent implements OnInit {
     this.registerservice.RegisterUser(this.name,this.email,this.username,this.password)
     .subscribe(data =>{
       console.log(data);
-      localStorage.setItem(this.email,this.email);
+     
     })
-    this.router.navigate(['/fileupload']);
+    this.router.navigate(['/fileupload',this.email]);
   }
 
 }
