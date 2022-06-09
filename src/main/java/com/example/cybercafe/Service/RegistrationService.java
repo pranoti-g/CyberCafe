@@ -8,6 +8,8 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 
@@ -22,17 +24,21 @@ public class RegistrationService {
         return registerRepo.save(registrationModel);
     }
 
-    public RegistrationModel uploadimage(MultipartFile file, String email) throws IOException {
+    public Map<String,String> uploadimage(MultipartFile file, String email) throws IOException {
        RegistrationModel registrationModel= registerRepo.findByEmail(email);
-
+        Map<String,String > map = new HashMap<>();
         try {
             String filename = StringUtils.cleanPath(file.getOriginalFilename());
             registrationModel.setPhotofilename(filename);
             registrationModel.setPhotodata(file.getBytes());
+            map.put("status","Success");
+            return map;
         } catch (Throwable th) {
             th.printStackTrace();
+            map.put("status","Failure");
+            return map;
         }
-        return registerRepo.save(registrationModel);
+
     }
 
     public Optional<RegistrationModel> GetAllDetails(int id) {
