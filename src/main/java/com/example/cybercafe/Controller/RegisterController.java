@@ -27,8 +27,8 @@ public class RegisterController {
     }
 
     @PutMapping("/uploadimage/{email}")
-    public String uploadFileimage(@RequestParam("file") MultipartFile file,
-                                  @PathVariable("email") String email) throws IOException{
+    public Map<String, String> uploadFileimage(@RequestParam("file") MultipartFile file,
+                                               @PathVariable("email") String email) throws IOException{
         Map<String,String > response = new HashMap<>();
         try {
 
