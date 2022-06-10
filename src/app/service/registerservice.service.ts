@@ -7,12 +7,23 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class RegisterserviceService {
+ 
+
 
   constructor(private http: HttpClient) { }
 
   baseurl = "http://localhost:8081/";
 
   url = "";
+
+
+  getExistingEmail(email:any):Observable<any> {
+    return this.http.get(this.baseurl+"checkEmailExistOrNot/"+email);
+  }
+
+  isUsernameAvailable(username: any):Observable<any> {
+    return this.http.get(this.baseurl+"isUsernameAvailable/"+username);
+  }
 
   public RegisterUser (name: any,email : any,username : any,password : any):Observable <any>{
 

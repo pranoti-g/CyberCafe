@@ -15,13 +15,18 @@
               <div class="row align-items-center pt-4 pb-3">
                 <div class="col-md-3 ps-5">
   
-                  <h6 class="mb-0">Full name</h6>
+                  <h5 class="mb-0">Full name</h5>
   
                 </div>
                 <div class="col-md-9 pe-5">
   
-                  <input type="text" [(ngModel)]="name" class="form-control form-control-lg" />
-  
+                  <input type="text" #fullName [(ngModel)]="name" (change)="getName(fullName.value)" class="form-control form-control-lg" />
+                  <div *ngIf="nameValid" class="name">
+                    <span>Name should contain more than 2 letters</span>
+                  </div>
+                  <div *ngIf="nameContainsNumber" class="name">
+                    <span>Number Not Allowed</span>
+                  </div>
                 </div>
               </div>
   
@@ -30,49 +35,59 @@
               <div class="row align-items-center py-3">
                 <div class="col-md-3 ps-5">
   
-                  <h6 class="mb-0">Email address</h6>
+                  <h5 class="mb-0">Email address</h5>
   
                 </div>
                 <div class="col-md-9 pe-5">
   
-                  <input type="email" [(ngModel)]="email" class="form-control form-control-lg" placeholder="example@example.com" />
-  
+                  <input type="email" #Email [(ngModel)]="email" (change)="getEmail(Email.value)" class="form-control form-control-lg" placeholder="example@example.com" />
+                  <div *ngIf="emailValid" class="name">
+                    <span>Invalid Email</span>
+                  </div>
+                  <div *ngIf="emailExist" class="name">
+                    <span>Email Already Exist</span>
+                  </div>
                 </div>
               </div>
   
-              <hr class="mx-n3">
+              <hr *ngIf="emailExist1" class="mx-n3">
 
-              <div class="row align-items-center py-3">
+              <div *ngIf="emailExist1" class="row align-items-center py-3">
                 <div class="col-md-3 ps-5">
   
-                  <h6 class="mb-0">Username</h6>
+                  <h5 class="mb-0">Username</h5>
   
                 </div>
                 <div class="col-md-9 pe-5">
   
-                  <input type="text" [(ngModel)]="username" class="form-control form-control-lg" placeholder="Enter Username" />
-  
+                  <input type="text" #userName [(ngModel)]="username" (change)="getUsername(userName.value)" class="form-control form-control-lg" placeholder="Enter Username" />
+                  <div *ngIf="shortUsername" class="name">
+                    <span>Username should contain more than 4 letter</span>
+                  </div>
                 </div>
               </div>
   
-              <hr class="mx-n3">
+              <hr *ngIf="userNameavailable" class="mx-n3">
 
-              <div class="row align-items-center py-3">
+              <div *ngIf="userNameavailable" class="row align-items-center py-3">
                 <div class="col-md-3 ps-5">
   
-                  <h6 class="mb-0">Password</h6>
+                  <h5 class="mb-0">Password</h5>
   
                 </div>
                 <div class="col-md-9 pe-5">
   
-                  <input type="password" [(ngModel)]="password" class="form-control form-control-lg" placeholder="Set Password" />
-  
+                  <input type="password" #passwordCheck [(ngModel)]="password" (change)="checkPassword(passwordCheck.value)" class="form-control form-control-lg" placeholder="Set Password" />
+                  <div *ngIf="passwordMin" class="name">
+                    <span>Minimum 8 character</span>
+                  </div>
+                 
                 </div>
               </div>
   
-              <hr class="mx-n3">
+              <hr *ngIf=""  class="mx-n3">
   
-              <div class="px-5 py-4">
+              <div *ngIf="validPassword" class="px-5 py-4">
                 <button type="submit" class="btn btn-primary btn-lg" (click) = "onSubmit()">Next</button>
               </div>
   
