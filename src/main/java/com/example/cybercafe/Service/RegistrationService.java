@@ -65,4 +65,30 @@ public class RegistrationService {
         }
 
     }
+
+    public Map<String, String> checkEmailExistOrNot(String email) {
+        RegistrationModel found = registerRepo.findByEmail(email);
+      Map<String,String > response = new HashMap<>();
+        if (!(found == null)){
+            response.put("status","Exist");
+            return response;
+        }else {
+            response.put("status","Not-Exist");
+            return response;
+        }
+
+    }
+
+    public Map<String, String> isUsernameAvailable(String username) {
+        RegistrationModel found = registerRepo.findByUsername(username);
+        Map<String,String > response = new HashMap<>();
+        if (found == null){
+            response.put("status","available");
+            return response;
+        }else {
+            response.put("status","Not-available");
+            return response;
+        }
+
+    }
 }

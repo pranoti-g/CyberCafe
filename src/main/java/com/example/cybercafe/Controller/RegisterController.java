@@ -20,6 +20,16 @@ public class RegisterController {
     @Autowired
     RegistrationService registrationService;
 
+    @GetMapping("/checkEmailExistOrNot/{email}")
+    public Map<String, String> checkEmailExistOrNot(@PathVariable("email") String email){
+        return registrationService.checkEmailExistOrNot(email);
+    }
+
+    @GetMapping("/isUsernameAvailable/{username}")
+    public Map<String, String> isUsernameAvailable(@PathVariable("username") String username){
+        return registrationService.isUsernameAvailable(username);
+    }
+
     @PostMapping("/register")
     public RegistrationModel registration(@RequestBody RegistrationModel registration){
 
