@@ -15,7 +15,7 @@ public class LoginService {
     RegisterRepo registerRepo;
 
     public Map<String, String> login(Map<String, String> userInput) {
-        String username = (String) userInput.get("username");
+        String username = userInput.get("username");
         String password = userInput.get("password");
         Map<String, String> response = new HashMap<String, String>();
         try {
@@ -32,5 +32,23 @@ public class LoginService {
             return response;
         }
         return response;
+    }
+
+    public Map<String, String> user(String username) {
+        Map<String, String> status = new HashMap<String, String>();
+        try {
+            RegistrationModel registrationModel = registerRepo.findByUsername(username);
+            if (registrationModel.getUsername().equals(username)) {
+                status.put("status", "user exists");
+                return status;
+            }else {
+                status.put("status", "Enter valid username");
+
+            }
+        } catch (Exception e) {
+            status.put("status", "User doesn't exist");
+            return status;
+        }
+        return status;
     }
 }

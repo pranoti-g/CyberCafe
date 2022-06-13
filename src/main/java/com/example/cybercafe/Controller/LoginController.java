@@ -17,4 +17,9 @@ public class LoginController {
     public Map<String, String> login(@RequestBody Map<String, String> userInput) {
         return loginService.login(userInput);
     }
+
+    @GetMapping("/validateuser/{username}")
+    public Map<String,String> user(@PathVariable("username") String username){
+        return loginService.user(username);
+    }
 }
