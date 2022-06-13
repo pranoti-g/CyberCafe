@@ -7,8 +7,10 @@ import com.example.cybercafe.Repository.TimeCalculationRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 @Service
 public class LoginService {
@@ -39,7 +41,17 @@ public class LoginService {
         return response;
     }
 
-    public TimeCalculation timeUtilized(TimeCalculation timeCalculation) {
+    public TimeCalculation timeUtilized(Map<String ,String > userDetails) {
+        TimeCalculation timeCalculation = timeCalculationRepo.findAll().stream()
+                .filter(timeCalculation1 -> timeCalculation1.getUsername().equals(userDetails.get("username")))
+                .max(Comparator.comparingInt(TimeCalculation::getId)).orElseThrow();
+        timeCalculation.setLogoutTime(userDetails.get("logoutTime"));
+        timeCalculation.setTimeUtilized(userDetails.get("timeUtilized"));
+        return timeCalculationRepo.save(timeCalculation);
+
+    }
+
+    public TimeCalculation saveLoginTime(TimeCalculation timeCalculation) {
         return timeCalculationRepo.save(timeCalculation);
     }
 }

@@ -20,8 +20,13 @@ public class LoginController {
         return loginService.login(userInput);
     }
 
-    @PostMapping("/timeUtilized")
-    public TimeCalculation timeUtilized(@RequestBody TimeCalculation timeCalculation){
-        return loginService.timeUtilized(timeCalculation);
+    @PostMapping("/saveLoginTime")
+    public TimeCalculation saveLoginTime(@RequestBody TimeCalculation timeCalculation){
+        return loginService.saveLoginTime(timeCalculation);
+    }
+
+    @PutMapping("/timeUtilized")
+    public TimeCalculation timeUtilized(@RequestBody Map<String ,String> userDeatils){
+        return loginService.timeUtilized(userDeatils);
     }
 }
