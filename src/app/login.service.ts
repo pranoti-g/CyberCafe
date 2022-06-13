@@ -19,12 +19,17 @@ export class LoginService {
     })
   }
 
-  public timeUtilized(username:any,loginTime:any,logoutTime:any,timeUtilised:any):Observable<any>{
-    console.log("In service method");
-    console.log(  "username"+username+"loginTime"+loginTime+"logoutTime"+logoutTime+"timeUtilized"+timeUtilised);
-    return this.http.post(this.baseurl+"timeUtilized",{
+  public saveLoginTime(username:any,loginTime:any):Observable<any>{
+    return this.http.post(this.baseurl+"saveLoginTime",{
       "username":username, 
-      "loginTime":loginTime,
+      "loginTime":loginTime     
+    })
+  }
+
+  public timeUtilized(username:any,logoutTime:any,timeUtilised:any):Observable<any>{
+    console.log(  "username"+username+"logoutTime"+logoutTime+"timeUtilized"+timeUtilised);
+    return this.http.put(this.baseurl+"timeUtilized",{
+      "username":username, 
       "logoutTime":logoutTime,
       "timeUtilized":timeUtilised
     })

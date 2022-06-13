@@ -28,7 +28,8 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.username = localStorage.getItem("username");
     this.loginTime = new Date().getHours() + ":" + new Date().getMinutes() + ":" + new Date().getSeconds();
-
+    this.loginService.saveLoginTime(this.username,this.loginTime).subscribe(
+      data => console.log("Done")    );
     this.startTimer();
   }
 
@@ -66,7 +67,7 @@ export class HomeComponent implements OnInit {
     this.logoutTime = new Date().getHours() + ":" + new Date().getMinutes() + ":" + new Date().getSeconds();
     this.usedTime = this.hours + ":" + this.minutes + ":" + this.seconds;
 
-    this.loginService.timeUtilized(this.username, this.loginTime, this.logoutTime, this.usedTime).subscribe(
+    this.loginService.timeUtilized(this.username, this.logoutTime, this.usedTime).subscribe(
       data => console.log("saved")
     );
     this.counter = undefined;
