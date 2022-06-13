@@ -7,7 +7,7 @@
       <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col-xl-9">
   
-          <h1 class="text-white mb-4">Register Here</h1>
+          <h1>Register Here</h1>
   
           <div class="card" style="border-radius: 15px;">
             <div class="card-body">
@@ -20,7 +20,7 @@
                 </div>
                 <div class="col-md-9 pe-5">
   
-                  <input type="text" #fullName [(ngModel)]="name" (change)="getName(fullName.value)" class="form-control form-control-lg" />
+                  <input type="text" #fullName  [(ngModel)]="name" (change)="getName(fullName.value)" class="form-control form-control-lg" />
                   <div *ngIf="nameValid" class="name">
                     <span>Name should contain more than 2 letters</span>
                   </div>
@@ -63,6 +63,9 @@
                   <input type="text" #userName [(ngModel)]="username" (change)="getUsername(userName.value)" class="form-control form-control-lg" placeholder="Enter Username" />
                   <div *ngIf="shortUsername" class="name">
                     <span>Username should contain more than 4 letter</span>
+                  </div>
+                  <div *ngIf="userNameNotavailable" class="name">
+                    <span>Username not available</span>
                   </div>
                 </div>
               </div>

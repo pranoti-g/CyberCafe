@@ -9,17 +9,19 @@ import { RegisterserviceService } from '../service/registerservice.service';
 })
 export class RegisterComponent implements OnInit {
   
-  name: any;
+  name: string | undefined;
   email: any;
   username: any;
   password: any;
 
   nameValid:boolean=false;
+ 
   nameContainsNumber:boolean=false;
   emailValid: boolean=false;
   emailExist: boolean=false;
   emailExist1: boolean=false;
   userNameavailable: boolean=false;
+  userNameNotavailable: boolean=false;
   shortUsername: boolean=false;
   passwordMin: boolean=false;
   validPassword: boolean=false;
@@ -43,6 +45,8 @@ export class RegisterComponent implements OnInit {
   }
 
   getName(name:string){
+   
+
     if(name.length<3){
       this.nameValid=true;
     }else{
@@ -58,7 +62,7 @@ export class RegisterComponent implements OnInit {
   }
 
   getEmail(email:string){
-    
+
     if (!((email.match("@")) && (email.match(".com")))) {
       this.emailValid=true;
       this.emailExist=false;
@@ -71,6 +75,7 @@ export class RegisterComponent implements OnInit {
             if(data.status=="Exist"){
               this.emailExist = true;
               this.emailExist1=false;
+              this.userNameavailable=false;
             }else{
               this.emailExist1=true;
               this.emailExist = false;
@@ -90,8 +95,10 @@ export class RegisterComponent implements OnInit {
         data =>{
           if(data.status=="available"){
             this.userNameavailable = true;
+            this.userNameNotavailable = false;
           }else{
             this.userNameavailable = false;
+            this.userNameNotavailable = true;
           }
         }
     );

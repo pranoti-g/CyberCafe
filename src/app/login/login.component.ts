@@ -10,7 +10,8 @@ export class LoginComponent implements OnInit {
 
   username:any;
   password:any;
-
+  Message:any;
+  wrongCredential:boolean=false;
   constructor(private loginService:LoginService) { }
 
   ngOnInit(): void {
@@ -22,11 +23,14 @@ export class LoginComponent implements OnInit {
 data=>{
   console.log(data);
   if(data.status == "valid-user"){
+    this.wrongCredential=false;
     alert('Succefully Login');
   }if(data.status == "Incorrect credentials"){
-    alert('Incorrect credentials');
+    this.wrongCredential=true;
+    this.Message ='Incorrect Credentials';
   }if(data.status == "User doesn't exist"){
-    alert("User doesn't exist");
+    this.wrongCredential = true;
+    this.Message ="User doesn't exist";
   }
 }
     );
