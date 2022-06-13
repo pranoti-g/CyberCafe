@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { LoginService } from '../login.service';
 
 @Component({
@@ -11,7 +12,7 @@ export class LoginComponent implements OnInit {
   username:any;
   password:any;
 
-  constructor(private loginService:LoginService) { }
+  constructor(private loginService:LoginService , private router:Router) { }
 
   ngOnInit(): void {
   }
@@ -23,6 +24,7 @@ data=>{
   console.log(data);
   if(data.status == "valid-user"){
     alert('Succefully Login');
+    this.router.navigate(['home']);
   }if(data.status == "Incorrect credentials"){
     alert('Incorrect credentials');
   }if(data.status == "User doesn't exist"){
