@@ -1,7 +1,9 @@
 package com.example.cybercafe.Service;
 
 import com.example.cybercafe.Model.RegistrationModel;
+import com.example.cybercafe.Model.TimeCalculation;
 import com.example.cybercafe.Repository.RegisterRepo;
+import com.example.cybercafe.Repository.TimeCalculationRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +15,9 @@ public class LoginService {
 
     @Autowired
     RegisterRepo registerRepo;
+
+    @Autowired
+    TimeCalculationRepo timeCalculationRepo;
 
     public Map<String, String> login(Map<String, String> userInput) {
         String username = userInput.get("username");
@@ -34,21 +39,7 @@ public class LoginService {
         return response;
     }
 
-    public Map<String, String> user(String username) {
-        Map<String, String> status = new HashMap<String, String>();
-        try {
-            RegistrationModel registrationModel = registerRepo.findByUsername(username);
-            if (registrationModel.getUsername().equals(username)) {
-                status.put("status", "user exists");
-                return status;
-            }else {
-                status.put("status", "Enter valid username");
-
-            }
-        } catch (Exception e) {
-            status.put("status", "User doesn't exist");
-            return status;
-        }
-        return status;
+    public TimeCalculation timeUtilized(TimeCalculation timeCalculation) {
+        return timeCalculationRepo.save(timeCalculation);
     }
 }
