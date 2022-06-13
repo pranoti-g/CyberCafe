@@ -26,7 +26,7 @@ data=>{
   if(data.status == "valid-user"){
     this.wrongCredential=false;
     alert('Succefully Login');
-    this.router.navigate(['home']);
+    this.router.navigate(['/home']);
   }if(data.status == "Incorrect credentials"){
     this.wrongCredential=true;
     this.Message ='Incorrect Credentials';
