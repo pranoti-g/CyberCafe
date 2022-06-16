@@ -67,7 +67,7 @@ export class HomeComponent implements OnInit {
     this.logoutTime = new Date().getHours() + ":" + new Date().getMinutes() + ":" + new Date().getSeconds();
     this.usedTime = this.hours + ":" + this.minutes + ":" + this.seconds;
 
-    this.loginService.timeUtilized(this.username, this.logoutTime, this.usedTime).subscribe(
+    this.loginService.logout(this.username, this.logoutTime, this.usedTime).subscribe(
       data => console.log("saved")
     );
     this.counter = undefined;

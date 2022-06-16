@@ -26,9 +26,9 @@ export class LoginService {
     })
   }
 
-  public timeUtilized(username:any,logoutTime:any,timeUtilised:any):Observable<any>{
+  public logout(username:any,logoutTime:any,timeUtilised:any):Observable<any>{
     console.log(  "username"+username+"logoutTime"+logoutTime+"timeUtilized"+timeUtilised);
-    return this.http.put(this.baseurl+"timeUtilized",{
+    return this.http.put(this.baseurl+"logout",{
       "username":username, 
       "logoutTime":logoutTime,
       "timeUtilized":timeUtilised

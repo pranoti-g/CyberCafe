@@ -22,6 +22,12 @@ export class LoginComponent implements OnInit {
     this.loginService.login(this.username, this.password).subscribe(
       data => {
         console.log(data);
+        if (data.status == "valid-admin") {
+          localStorage.setItem("username", this.username);
+          this.wrongCredential = false;
+          alert('Succefully Login');
+          this.router.navigate(['/admin']);
+        }
         if (data.status == "valid-user") {
           localStorage.setItem("username", this.username);
           this.wrongCredential = false;
