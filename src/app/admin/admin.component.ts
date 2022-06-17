@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+
+import { ToastrService } from 'ngx-toastr';
 import { AdminService } from '../admin.service';
 import { StompServiceService } from '../stomp-service.service';
 
@@ -9,28 +11,38 @@ import { StompServiceService } from '../stomp-service.service';
 })
 export class AdminComponent implements OnInit {
 
-  notification:any;
+  userDetails:any;
   constructor(private stompService:StompServiceService,
-    private adminService:AdminService) { }
+    private adminService:AdminService,
+    private toastr: ToastrService
+) { }
 
   ngOnInit(): void {
-    
-    
-
     this.stompService.subscribe('/topic/request',():void=>{
       console.log("getCall")
       this.userLogout();
+      this.getUserDetails();
     })
+
+    this.getUserDetails();
   }
 
 
   userLogout(){
       this.adminService.userLogout().subscribe(
         data =>{
-          this.notification=data.status+" user Logout";
-          console.log(this.notification)
+         this.toastr.success(data.status+" Logout");
+        
 
         }
       )
+  }
+
+  getUserDetails(){
+    this.adminService.getUserDetails().subscribe(
+      data =>{
+        this.userDetails=data;
+      }
+    )
   }
 }

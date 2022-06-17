@@ -9,10 +9,15 @@ export class AdminService {
 
   constructor(private http: HttpClient) { }
   baseurl = "http://localhost:8082/";
+  baseurl1 = "http://localhost:8081/";
 
   url = "";
 
   public userLogout():Observable<any>{
     return this.http.get(this.baseurl+"userLogout");
+  }
+
+  public getUserDetails():Observable<any>{
+    return this.http.get(this.baseurl1+"getAllUserDetails");
   }
 }
